@@ -65,6 +65,8 @@ def end_fast_for_user(
     active_fast = fasts.get_active_fast(db, user_id=user_id)
     if not active_fast:
         raise HTTPException(status_code=400, detail="There is no fast is in progress")
+    if fast.end_time < active_fast.start_time:
+        raise HTTPException(status_code=400, detail="End date cannnot be before start date.")
     return fasts.end_user_fast(db=db, fast=fast, active_fast=active_fast)
 
 
