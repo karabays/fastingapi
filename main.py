@@ -58,11 +58,14 @@ def create_fast_for_user(
     return fasts.create_user_fast(db=db, fast=fast, user_id=user_id)
 
 
-@app.get("/users/{user_id}/end_fast/{id}", response_model=fasts.Fast)
+@app.post("/users/{user_id}/end_fast/", response_model=fasts.Fast)
 def end_fast_for_user(
-    user_id: int, id: int, db: Session = Depends(get_db)
+    user_id: int, fast: fasts.FastEnd, db: Session = Depends(get_db)
 ):
-    return fasts.end_user_fast(db=db, user_id=user_id, id=id)
+    active_fast = fasts.get_active_fast(db, user_id=user_id)
+    if not active_fast:
+        raise HTTPException(status_code=400, detail="There is no fast is in progress")
+    return fasts.end_user_fast(db=db, fast=fast, active_fast=active_fast)
 
 
 @app.get("/users/{user_id}/fasts", response_model=List[fasts.Fast])
