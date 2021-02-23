@@ -41,6 +41,13 @@ class Fast(FastBase):
 class FastEnd(FastBase):
     end_time: Optional[datetime.datetime] = datetime.datetime.now()
 
+    @validator('end_time')
+    def future_date(cls, dt):
+        now = datetime.datetime.now()
+        if dt > now:
+            raise ValueError ("You can't create future date fast.")
+        return dt
+
 def get_fasts(db: Session, user_id: int, skip: int = 0, limit: int = 100):
     return db.query(db_models.Fast).filter(db_models.Fast.user_id == user_id).offset(skip).limit(limit).all()
 
