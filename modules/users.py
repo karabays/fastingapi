@@ -3,8 +3,8 @@ from typing import List, Optional
 import datetime
 from pydantic import BaseModel
 
-import database.database as db_models
-from modules import fasts
+from ..database import database as db_models
+from ..modules import fasts
 
 # schemas
 class UserBase(BaseModel):
@@ -32,7 +32,7 @@ def get_user(db: Session, user_id: int):
     user.active_fast = fasts.get_active_fast(db, user_id)
     # calculate the duration but don't write it to database until fast is completed.
     if user.active_fast:
-        user.active_fast.duration = datetime.datetime.now() - user.active_fast.start_time
+        user.active_fast.duration = datetime.datetime.utcnow() - user.active_fast.start_time
     return user
 
 
