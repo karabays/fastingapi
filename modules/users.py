@@ -20,15 +20,20 @@ class User(UserBase):
     is_active: bool
     weight: Optional[float] = None
     height: Optional[float] = None
-    user_fasts: List[fasts.Fast] = []
+    active_fast: Optional[fasts.Fast] = None
 
     class Config:
         orm_mode = True
 
 
-# CRUD part
+# Get user information for dashboard/profile page
 def get_user(db: Session, user_id: int):
-    return db.query(db_models.User).filter(db_models.User.id == user_id).first()
+    user: User = db.query(db_models.User).filter(db_models.User.id == user_id).first()
+    user.active_fast = fasts.get_active_fast(db, user_id)
+    # calculate the duration but don't write it to database until fast is completed.
+    if user.active_fast:
+        user.active_fast.duration = datetime.datetime.now() - user.active_fast.start_time
+    return user
 
 
 def get_user_by_email(db: Session, email: str):
