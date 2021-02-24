@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
-import datetime
+from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, ValidationError, validator
 
 from fastapi import Depends
 
-import database.database as db_models
+from ..database import database as db_models
 
 
 class FastBase(BaseModel):
@@ -19,12 +19,12 @@ class FastCreate(FastBase):
     Create fast by sending start time and one of the planned duration (in hours) or planned end date
     information in the message body. 
     '''
-    start_time: datetime.datetime = datetime.datetime.now()
-    planned_end_time: datetime.datetime = datetime.datetime.now() + datetime.timedelta(hours=18)
+    start_time: datetime = datetime.utcnow()
+    planned_end_time: datetime = datetime.utcnow() + timedelta(hours=23)
 
     @validator('start_time')
     def future_date(cls, dt):
-        now = datetime.datetime.now()
+        now = datetime.utcnow()
         if dt > now:
             raise ValueError ("You can't create future date fast.")
         return dt
@@ -34,21 +34,21 @@ class FastCreate(FastBase):
 class Fast(FastBase):
     id: int
     user_id: int
-    start_time: datetime.datetime
-    end_time: Optional[datetime.datetime] = None
+    start_time: datetime
+    end_time: Optional[datetime] = None
     completed: Optional[bool]
-    duration: Optional[datetime.timedelta]
-    planned_end_time: datetime.datetime
+    duration: Optional[timedelta]
+    planned_end_time: datetime
 
     class Config:
         orm_mode = True
 
 class FastEnd(FastBase):
-    end_time: Optional[datetime.datetime] = datetime.datetime.now()
+    end_time: Optional[datetime] = datetime.utcnow()
 
     @validator('end_time')
     def future_date(cls, dt):
-        now = datetime.datetime.now()
+        now = datetime.utcnow()
         if dt > now:
             raise ValueError ("You can't end fast with future date.")
         return dt

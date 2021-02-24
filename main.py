@@ -4,11 +4,11 @@ import uvicorn
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-import modules.users as users
-import modules.fasts as fasts
-from database.database import SessionLocal, engine, Base
+from .modules import users
+from .modules import fasts
+from .database import database
 
-Base.metadata.create_all(bind=engine)
+database.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(
     title = "Fast(i)ngAPI",
@@ -18,7 +18,7 @@ app = FastAPI(
 
 # Dependency
 def get_db():
-    db = SessionLocal()
+    db = database.SessionLocal()
     try:
         yield db
     finally:
@@ -80,4 +80,3 @@ def end_fast_for_user(
 def read_fasts(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     all_fasts = fasts.get_fasts(db, user_id=user_id, skip=skip, limit=limit)
     return all_fasts
-
