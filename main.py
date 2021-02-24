@@ -1,4 +1,5 @@
 from typing import List
+import uvicorn
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
@@ -9,7 +10,10 @@ from database.database import SessionLocal, engine, Base
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title = "Fast(i)ngAPI",
+    description = "Fasting and weight tracker built with FastAPI at the backend and Angular at the front."
+)
 
 
 # Dependency
@@ -48,17 +52,19 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.post("/users/{user_id}/fasts/", response_model=fasts.Fast)
+@app.post("/fast/{user_id}/fasts/", response_model=fasts.Fast)
 def create_fast_for_user(
     user_id: int, fast: fasts.FastCreate, db: Session = Depends(get_db)
 ):
     active_fast = fasts.get_active_fast(db, user_id=user_id)
     if active_fast:
         raise HTTPException(status_code=400, detail="Already a fast is in progress")
+    if fast.planned_end_time < fast.start_time:
+        raise HTTPException(status_code=400, detail="End time can't be before start time")
     return fasts.create_user_fast(db=db, fast=fast, user_id=user_id)
 
 
-@app.post("/users/{user_id}/end_fast/", response_model=fasts.Fast)
+@app.post("/fast/{user_id}/end_fast/", response_model=fasts.Fast)
 def end_fast_for_user(
     user_id: int, fast: fasts.FastEnd, db: Session = Depends(get_db)
 ):
@@ -70,7 +76,8 @@ def end_fast_for_user(
     return fasts.end_user_fast(db=db, fast=fast, active_fast=active_fast)
 
 
-@app.get("/users/{user_id}/fasts", response_model=List[fasts.Fast])
+@app.get("/fast/{user_id}/fasts", response_model=List[fasts.Fast])
 def read_fasts(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     all_fasts = fasts.get_fasts(db, user_id=user_id, skip=skip, limit=limit)
     return all_fasts
+

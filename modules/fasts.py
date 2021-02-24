@@ -3,6 +3,8 @@ from typing import List, Optional
 import datetime
 from pydantic import BaseModel, ValidationError, validator
 
+from fastapi import Depends
+
 import database.database as db_models
 
 
@@ -13,9 +15,13 @@ class FastBase(BaseModel):
 # Shcema for creating the fasts, nothing in there because inheriting from 
 # FastBase Class
 class FastCreate(FastBase):
-    start_time: datetime.datetime
-    planned_duration: int
-    
+    '''
+    Create fast by sending start time and one of the planned duration (in hours) or planned end date
+    information in the message body. 
+    '''
+    start_time: datetime.datetime = datetime.datetime.now()
+    planned_end_time: datetime.datetime = datetime.datetime.now() + datetime.timedelta(hours=18)
+
     @validator('start_time')
     def future_date(cls, dt):
         now = datetime.datetime.now()
@@ -31,9 +37,8 @@ class Fast(FastBase):
     start_time: datetime.datetime
     end_time: Optional[datetime.datetime] = None
     completed: Optional[bool]
-    planned_duration: Optional[int]
-    duration: Optional[int]
-
+    duration: Optional[datetime.timedelta]
+    planned_end_time: datetime.datetime
 
     class Config:
         orm_mode = True
@@ -70,6 +75,7 @@ def create_user_fast(db: Session, fast: FastCreate, user_id: int):
 def end_user_fast(db: Session, fast: FastEnd, active_fast):
     active_fast.end_time = fast.end_time
     active_fast.completed = True
+    active_fast.duration = active_fast.end_time - active_fast.start_time
     db.commit()
     db.refresh(active_fast)
     return active_fast

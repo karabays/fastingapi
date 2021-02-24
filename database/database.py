@@ -33,6 +33,6 @@ class Fast(Base):
     deleted = Column(Boolean)
     completed = Column(Boolean)
     duration = Column(Interval)
-    planned_duration = Column(Integer)
+    planned_end_time = Column(DateTime)
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", back_populates="fasts")
