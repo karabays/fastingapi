@@ -3,13 +3,17 @@ from typing import List, Optional
 import datetime
 from pydantic import BaseModel
 
-from ..database import database as db_models
+from fastapi import Depends, APIRouter, HTTPException
+
+from ..database.database import DBUser
 from ..modules import fasts
+from ..dependencies import get_db
+
+router = APIRouter()
 
 # schemas
 class UserBase(BaseModel):
     email: str
-
 
 class UserCreate(UserBase):
     password: str
@@ -28,7 +32,7 @@ class User(UserBase):
 
 # Get user information for dashboard/profile page
 def get_user(db: Session, user_id: int):
-    user: User = db.query(db_models.User).filter(db_models.User.id == user_id).first()
+    user: User = db.query(DBUser).filter(DBUser.id == user_id).first()
     user.active_fast = fasts.get_active_fast(db, user_id)
     # calculate the duration but don't write it to database until fast is completed.
     if user.active_fast:
@@ -37,17 +41,40 @@ def get_user(db: Session, user_id: int):
 
 
 def get_user_by_email(db: Session, email: str):
-    return db.query(db_models.User).filter(db_models.User.email == email).first()
+    # print(db.query(db_models.DBUser).filter(db_models.DBUser.email == email).first())
+    return db.query(DBUser).filter(DBUser.email == email).first()
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(db_models.User).offset(skip).limit(limit).all()
+    return db.query(DBUser).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: UserCreate):
+def create_user_db(db: Session, user: UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"
-    db_user = db_models.User(email=user.email, hashed_password=fake_hashed_password)
+    db_user = DBUser(email=user.email, hashed_password=fake_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+    return db_user
+
+
+@router.post("/users/", response_model=User)
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = get_user_by_email(db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return create_user_db(db=db, user=user)
+
+
+@router.get("/users/", response_model=List[User])
+def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    all_users = get_users(db, skip=skip, limit=limit)
+    return all_users
+
+
+@router.get("/users/{user_id}", response_model=User)
+def read_user(user_id: int, db: Session = Depends(get_db)):
+    db_user = get_user(db, user_id=user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
     return db_user

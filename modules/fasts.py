@@ -3,9 +3,12 @@ from typing import List, Optional
 from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, ValidationError, validator
 
-from fastapi import Depends
+from fastapi import Depends, APIRouter
 
-from ..database import database as db_models
+from ..database.database import DBFast
+from ..dependencies import get_db
+
+router = APIRouter()
 
 
 class FastBase(BaseModel):
@@ -55,16 +58,16 @@ class FastEnd(FastBase):
 
 
 def get_fasts(db: Session, user_id: int, skip: int = 0, limit: int = 100):
-    return db.query(db_models.Fast).filter(db_models.Fast.user_id == user_id).offset(skip).limit(limit).all()
+    return db.query(DBFast).filter(DBFast.user_id == user_id).offset(skip).limit(limit).all()
 
 
 def get_active_fast(db: Session, user_id: int):
-    return db.query(db_models.Fast).filter(db_models.Fast.user_id == user_id, 
-        db_models.Fast.completed == False).first()
+    return db.query(DBFast).filter(DBFast.user_id == user_id, 
+        DBFast.completed == False).first()
 
 
 def create_user_fast(db: Session, fast: FastCreate, user_id: int):
-    db_fast = db_models.Fast(**fast.dict(), user_id=user_id, deleted = False,
+    db_fast = DBFast(**fast.dict(), user_id=user_id, deleted = False,
     completed = False)
     db.add(db_fast)
     db.commit()
@@ -79,3 +82,33 @@ def end_user_fast(db: Session, fast: FastEnd, active_fast):
     db.commit()
     db.refresh(active_fast)
     return active_fast
+
+
+@router.post("/fast/{user_id}/fasts/", response_model=Fast)
+def create_fast_for_user(
+    user_id: int, fast: FastCreate, db: Session = Depends(get_db)
+):
+    active_fast = fasts.get_active_fast(db, user_id=user_id)
+    if active_fast:
+        raise HTTPException(status_code=400, detail="Already a fast is in progress")
+    if fast.planned_end_time < fast.start_time:
+        raise HTTPException(status_code=400, detail="End time can't be before start time")
+    return create_user_fast(db=db, fast=fast, user_id=user_id)
+
+
+@router.post("/fast/{user_id}/end_fast/", response_model=Fast)
+def end_fast_for_user(
+    user_id: int, fast: FastEnd, db: Session = Depends(get_db)
+):
+    active_fast = get_active_fast(db, user_id=user_id)
+    if not active_fast:
+        raise HTTPException(status_code=400, detail="There is no fast is in progress")
+    if fast.end_time < active_fast.start_time:
+        raise HTTPException(status_code=400, detail="End date cannnot be before start date.")
+    return end_user_fast(db=db, fast=fast, active_fast=active_fast)
+
+
+@router.get("/fast/{user_id}/fasts", response_model=List[Fast])
+def read_fasts(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    all_fasts = get_fasts(db, user_id=user_id, skip=skip, limit=limit)
+    return all_fasts
