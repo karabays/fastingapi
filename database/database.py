@@ -13,7 +13,7 @@ Base = declarative_base()
 session = SessionLocal()
 
 
-class User(Base):
+class DBUser(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -22,10 +22,10 @@ class User(Base):
     height = Column(Float)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    fasts = relationship("Fast", back_populates="user")
+    fasts = relationship("DBFast", back_populates="user")
 
 
-class Fast(Base):
+class DBFast(Base):
     __tablename__ = 'fasts'
     id = Column(Integer, primary_key = True)
     start_time = Column(DateTime)
@@ -35,4 +35,4 @@ class Fast(Base):
     duration = Column(Interval)
     planned_end_time = Column(DateTime)
     user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="fasts")
+    user = relationship("DBUser", back_populates="fasts")
