@@ -34,5 +34,6 @@ class DBFast(Base):
     completed = Column(Boolean)
     duration = Column(Interval)
     planned_end_time = Column(DateTime)
+    planned_duration = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("DBUser", back_populates="fasts")
