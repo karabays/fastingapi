@@ -3,7 +3,7 @@ from typing import List, Optional
 from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, ValidationError, validator
 
-from fastapi import Depends, APIRouter
+from fastapi import Depends, APIRouter, HTTPException
 
 from ..database.database import DBFast
 from ..dependencies import get_db
@@ -15,15 +15,14 @@ class FastBase(BaseModel):
     pass
 
 
-# Shcema for creating the fasts, nothing in there because inheriting from 
-# FastBase Class
 class FastCreate(FastBase):
     '''
     Create fast by sending start time and one of the planned duration (in hours) or planned end date
     information in the message body. 
     '''
     start_time: datetime = datetime.utcnow()
-    planned_end_time: datetime = datetime.utcnow() + timedelta(hours=23)
+    planned_duration: Optional[float] = 23
+    planned_end_time: Optional[datetime] = start_time + timedelta(hours=23)
 
     @validator('start_time')
     def future_date(cls, dt):
@@ -32,8 +31,7 @@ class FastCreate(FastBase):
             raise ValueError ("You can't create future date fast.")
         return dt
 
-# The Schema for returning the fasts. I don't need to add start_time and 
-# planned duration because already inheriting them from FastBase class.
+
 class Fast(FastBase):
     id: int
     user_id: int
@@ -42,6 +40,7 @@ class Fast(FastBase):
     completed: Optional[bool]
     duration: Optional[timedelta]
     planned_end_time: datetime
+    planned_duration: Optional[float]
 
     class Config:
         orm_mode = True
@@ -67,6 +66,12 @@ def get_active_fast(db: Session, user_id: int):
 
 
 def create_user_fast(db: Session, fast: FastCreate, user_id: int):
+    if fast.planned_duration:
+        fast.planned_end_time = fast.start_time + timedelta(hours=fast.planned_duration)
+    if not fast.planned_duration:
+        fast.planned_duration = (fast.planned_end_time - fast.start_time).seconds / 3600
+        print(fast.planned_duration)
+
     db_fast = DBFast(**fast.dict(), user_id=user_id, deleted = False,
     completed = False)
     db.add(db_fast)
@@ -84,11 +89,17 @@ def end_user_fast(db: Session, fast: FastEnd, active_fast):
     return active_fast
 
 
-@router.post("/fast/{user_id}/fasts/", response_model=Fast)
+@router.post("/{user_id}/fasts/", response_model=Fast)
 def create_fast_for_user(
     user_id: int, fast: FastCreate, db: Session = Depends(get_db)
 ):
-    active_fast = fasts.get_active_fast(db, user_id=user_id)
+    '''
+    Creates a new fast for the active user either with planned end time (UTC without 
+    timezone) or planned duration(in hours).
+    If both parameters are present, planned duration wins. If none of them specified,
+    default is 23 hours.
+    '''
+    active_fast = get_active_fast(db, user_id=user_id)
     if active_fast:
         raise HTTPException(status_code=400, detail="Already a fast is in progress")
     if fast.planned_end_time < fast.start_time:
@@ -96,7 +107,7 @@ def create_fast_for_user(
     return create_user_fast(db=db, fast=fast, user_id=user_id)
 
 
-@router.post("/fast/{user_id}/end_fast/", response_model=Fast)
+@router.post("/{user_id}/end_fast/", response_model=Fast)
 def end_fast_for_user(
     user_id: int, fast: FastEnd, db: Session = Depends(get_db)
 ):
@@ -108,7 +119,7 @@ def end_fast_for_user(
     return end_user_fast(db=db, fast=fast, active_fast=active_fast)
 
 
-@router.get("/fast/{user_id}/fasts", response_model=List[Fast])
+@router.get("/{user_id}/fasts/", response_model=List[Fast])
 def read_fasts(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     all_fasts = get_fasts(db, user_id=user_id, skip=skip, limit=limit)
     return all_fasts
