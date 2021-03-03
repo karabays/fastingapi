@@ -58,7 +58,7 @@ def create_user_db(db: Session, user: UserCreate):
     return db_user
 
 
-@router.post("/users/", response_model=User)
+@router.post("/", response_model=User)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, email=user.email)
     if db_user:
@@ -66,13 +66,13 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user_db(db=db, user=user)
 
 
-@router.get("/users/", response_model=List[User])
+@router.get("/", response_model=List[User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     all_users = get_users(db, skip=skip, limit=limit)
     return all_users
 
 
-@router.get("/users/{user_id}", response_model=User)
+@router.get("/{user_id}", response_model=User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = get_user(db, user_id=user_id)
     if db_user is None:
