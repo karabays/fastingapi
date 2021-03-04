@@ -19,12 +19,25 @@ class UserCreate(UserBase):
     password: str
 
 
+class UserStats(BaseModel):
+    number_of_fasts: int
+    total_hours_fasted: float
+    longest_fast: float
+    weight: float
+    height: float
+    bmi: float
+    goal_weight: float
+    start_weight: float
+    weight_loss: float
+
+
 class User(UserBase):
     id: int
     is_active: bool
     weight: Optional[float] = None
     height: Optional[float] = None
     active_fast: Optional[fasts.Fast] = None
+    user_stats: Optional[UserStats] = None
 
     class Config:
         orm_mode = True
