@@ -19,10 +19,12 @@ class DBUser(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     weight = Column(Float)
+    goal_weight = Column(Float)
     height = Column(Float)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     fasts = relationship("DBFast", back_populates="user")
+    weights = relationship("DBWeight", back_populates="user")
 
 
 class DBFast(Base):
@@ -37,3 +39,13 @@ class DBFast(Base):
     planned_duration = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("DBUser", back_populates="fasts")
+
+class DBWeight(Base):
+    __tablename__ = 'weight'
+    id = Column(Integer, primary_key = True)
+    weight_time = Column(DateTime)
+    weight = Column(Float)
+    unit = Column(String)
+    bmi = Column(Float)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("DBUser", back_populates="weights")

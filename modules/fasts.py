@@ -70,7 +70,6 @@ def create_user_fast(db: Session, fast: FastCreate, user_id: int):
         fast.planned_end_time = fast.start_time + timedelta(hours=fast.planned_duration)
     if not fast.planned_duration:
         fast.planned_duration = (fast.planned_end_time - fast.start_time).seconds / 3600
-        print(fast.planned_duration)
 
     db_fast = DBFast(**fast.dict(), user_id=user_id, deleted = False,
     completed = False)
