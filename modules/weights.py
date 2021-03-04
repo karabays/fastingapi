@@ -30,7 +30,7 @@ class Weight(WeightBase):
 def user_weight_in(db: Session, weight: Weight, user_id: int):
     if weight.unit == MeasurementSys.imperial:
         weight.weight = weight.weight * 0.45359237
-        weight.unit = 'kgs'
+        weight.unit = 'metric'
     db_weight = DBWeight(**weight.dict(), user_id=user_id)
     db_weight.bmi = calculate_bmi(weight)
     db.add(db_weight)
