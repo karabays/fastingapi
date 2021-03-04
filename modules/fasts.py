@@ -10,7 +10,6 @@ from ..dependencies import get_db
 
 router = APIRouter()
 
-
 class FastBase(BaseModel):
     pass
 

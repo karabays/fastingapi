@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from fastapi import Depends, APIRouter, HTTPException
 
 from ..database.database import DBUser
-from ..modules import fasts
+from ..modules import fasts, weights
 from ..dependencies import get_db
 
 router = APIRouter()
@@ -14,10 +14,16 @@ router = APIRouter()
 # schemas
 class UserBase(BaseModel):
     email: str
+    weight: Optional[float]
+    height: Optional[float]
+    goal_weight: Optional[float]
+    unit: weights.MeasurementSys = weights.MeasurementSys.metric
+
+    class Config:
+        orm_mode = True
 
 class UserCreate(UserBase):
     password: str
-
 
 class UserStats(BaseModel):
     number_of_fasts: int
@@ -39,9 +45,6 @@ class User(UserBase):
     active_fast: Optional[fasts.Fast] = None
     user_stats: Optional[UserStats] = None
 
-    class Config:
-        orm_mode = True
-
 
 # Get user information for dashboard/profile page
 def get_user(db: Session, user_id: int):
@@ -51,6 +54,7 @@ def get_user(db: Session, user_id: int):
     if user.active_fast:
         user.active_fast.duration = datetime.datetime.utcnow() - user.active_fast.start_time
     return user
+
 
 
 def get_user_by_email(db: Session, email: str):
@@ -63,15 +67,17 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user_db(db: Session, user: UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = DBUser(email=user.email, hashed_password=fake_hashed_password)
+    user_dict = user.dict()
+    user_dict['hashed_password'] = user.password + "notreallyhashed"
+    user_dict.pop('password')
+    db_user = DBUser(**user_dict)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
 
-@router.post("/", response_model=User)
+@router.post("/", response_model=UserBase)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, email=user.email)
     if db_user:

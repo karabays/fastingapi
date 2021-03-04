@@ -12,8 +12,8 @@ from ..dependencies import get_db
 router = APIRouter()
 
 class MeasurementSys(str, Enum):
-    metric = 'kgs'
-    imperial = 'lbs'
+    metric = 'metric'
+    imperial = 'imperial'
 
 class WeightBase(BaseModel):
     weight: float
@@ -28,6 +28,9 @@ class Weight(WeightBase):
 
 
 def user_weight_in(db: Session, weight: Weight, user_id: int):
+    if weight.unit == MeasurementSys.imperial:
+        weight.weight = weight.weight * 0.45359237
+        weight.unit = 'kgs'
     db_weight = DBWeight(**weight.dict(), user_id=user_id)
     db_weight.bmi = calculate_bmi(weight)
     db.add(db_weight)
@@ -39,7 +42,8 @@ def user_weight_in(db: Session, weight: Weight, user_id: int):
 def calculate_bmi(weight: Weight):
     return weight.weight / 1.72 ** 2
 
-
 @router.post("/{user_id}/fasts/", response_model=Weight)
 def new_weight_for_user(user_id: int, weight: WeightBase, db: Session = Depends(get_db)):
+    ''' New weight entry for the user. Send metric for kgs and imperial for lbs.
+    '''
     return user_weight_in(db=db, weight=weight, user_id=user_id)

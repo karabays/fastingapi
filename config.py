@@ -13,4 +13,8 @@ tags_metadata = [
         "name": "fasts",
         "description": "Manage fasts. All datetime parameters are in UTC and _timezone-naive_",
     },
+    {
+        "name": "weights",
+        "description": "Enter and update weights"
+    }
 ]

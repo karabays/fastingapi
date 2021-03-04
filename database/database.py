@@ -23,6 +23,7 @@ class DBUser(Base):
     height = Column(Float)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    unit = Column(String)
     fasts = relationship("DBFast", back_populates="user")
     weights = relationship("DBWeight", back_populates="user")
 
