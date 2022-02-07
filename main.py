@@ -8,9 +8,15 @@ from fastapi.security.api_key import APIKeyHeader
 
 from sqlalchemy.orm import Session
 
-from .modules import users, fasts, weights
-from .database import database
-from . import config
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+from fastingapi.modules import users, fasts, weights
+from fastingapi.database import database
+from fastingapi import config
 
 database.Base.metadata.create_all(bind=database.engine)
 

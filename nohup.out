@@ -1,0 +1,86 @@
+Traceback (most recent call last):
+  File "/home/serkan/.local/bin/uvicorn", line 8, in <module>
+    sys.exit(main())
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1128, in __call__
+    return self.main(*args, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1053, in main
+    rv = self.invoke(ctx)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1395, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 754, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 435, in main
+    run(app, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 461, in run
+    server.run()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+Traceback (most recent call last):
+  File "/home/serkan/.local/bin/uvicorn", line 8, in <module>
+    sys.exit(main())
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1128, in __call__
+    return self.main(*args, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1053, in main
+    rv = self.invoke(ctx)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1395, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 754, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 435, in main
+    run(app, **kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 461, in run
+    server.run()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'app'
+INFO:     Started server process [1996569]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:9800 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58898 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58900 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58900 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58904 - "GET /users/1 HTTP/1.1" 200 OK
