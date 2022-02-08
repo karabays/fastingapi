@@ -19,13 +19,13 @@ class FastCreate(FastBase):
     Create fast by sending start time and one of the planned duration (in hours) or planned end date
     information in the message body. 
     '''
-    start_time: datetime = datetime.utcnow()
+    start_time: datetime = datetime.now()
     planned_duration: Optional[float] = 23
     planned_end_time: Optional[datetime] = start_time + timedelta(hours=23)
 
     @validator('start_time')
     def future_date(cls, dt):
-        now = datetime.utcnow()
+        now = datetime.now()
         if dt > now:
             raise ValueError ("You can't create future date fast.")
         return dt
@@ -45,11 +45,11 @@ class Fast(FastBase):
         orm_mode = True
 
 class FastEnd(FastBase):
-    end_time: Optional[datetime] = datetime.utcnow()
+    end_time: Optional[datetime] = datetime.now()
 
     @validator('end_time')
     def future_date(cls, dt):
-        now = datetime.utcnow()
+        now = datetime.now()
         if dt > now:
             raise ValueError ("You can't end fast with future date.")
         return dt
@@ -92,7 +92,7 @@ def create_fast_for_user(
     user_id: int, fast: FastCreate, db: Session = Depends(get_db)
 ):
     '''
-    Creates a new fast for the active user either with planned end time (UTC without 
+    Creates a new fast for the active user either with planned end time (without 
     timezone) or planned duration(in hours).
     If both parameters are present, planned duration wins. If none of them specified,
     default is 23 hours.

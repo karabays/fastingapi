@@ -1,6 +1,9 @@
 # Database
 database/fastingapi.db
 
+# other files
+nohup.out
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -18,7 +21,9 @@ downloads/
 eggs/
 .eggs/
 lib/
-lib64/
+include/
+lib64
+bin/
 parts/
 sdist/
 var/

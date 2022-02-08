@@ -1,86 +1,597 @@
-Traceback (most recent call last):
-  File "/home/serkan/.local/bin/uvicorn", line 8, in <module>
-    sys.exit(main())
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1128, in __call__
-    return self.main(*args, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1053, in main
-    rv = self.invoke(ctx)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1395, in invoke
-    return ctx.invoke(self.callback, **ctx.params)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 754, in invoke
-    return __callback(*args, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 435, in main
-    run(app, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 461, in run
-    server.run()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
-    return asyncio.run(self.serve(sockets=sockets))
-  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
-    return loop.run_until_complete(main)
-  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
-    return future.result()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
-    config.load()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
-    self.loaded_app = import_from_string(self.app)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
-    raise exc from None
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
-    module = importlib.import_module(module_str)
-  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
-ModuleNotFoundError: No module named 'app'
-Traceback (most recent call last):
-  File "/home/serkan/.local/bin/uvicorn", line 8, in <module>
-    sys.exit(main())
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1128, in __call__
-    return self.main(*args, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1053, in main
-    rv = self.invoke(ctx)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 1395, in invoke
-    return ctx.invoke(self.callback, **ctx.params)
-  File "/home/serkan/.local/lib/python3.8/site-packages/click/core.py", line 754, in invoke
-    return __callback(*args, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 435, in main
-    run(app, **kwargs)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/main.py", line 461, in run
-    server.run()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
-    return asyncio.run(self.serve(sockets=sockets))
-  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
-    return loop.run_until_complete(main)
-  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
-    return future.result()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
-    config.load()
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
-    self.loaded_app = import_from_string(self.app)
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
-    raise exc from None
-  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
-    module = importlib.import_module(module_str)
-  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
-ModuleNotFoundError: No module named 'app'
-INFO:     Started server process [1996569]
+
+INFO:     Will watch for changes in these directories: ['/home/serkan/fastingapi']
+INFO:     Uvicorn running on http://0.0.0.0:9800 (Press CTRL+C to quit)
+INFO:     Started reloader process [2320787] using statreload
+INFO:     Started server process [2320814]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:9800 (Press CTRL+C to quit)
-INFO:     127.0.0.1:58898 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58900 - "GET /docs HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58900 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58904 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34386 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34386 - "GET /openapi.json HTTP/1.1" 200 OK
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2320814]
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4
+    from
+        ^
+SyntaxError: invalid syntax
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4
+    from zoneinfo
+                ^
+SyntaxError: invalid syntax
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4
+    from zoneinfo import
+                        ^
+SyntaxError: invalid syntax
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from zoneinfo import Zone
+ModuleNotFoundError: No module named 'zoneinfo'
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-6:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from zoneinfo import ZoneInfo
+ModuleNotFoundError: No module named 'zoneinfo'
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-7:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from zoneinfo import ZoneInfo
+ModuleNotFoundError: No module named 'zoneinfo'
+WARNING:  StatReload detected file change in 'lib/python3.9/site-packages/sqlalchemy/processors.py'. Reloading...
+Process SpawnProcess-8:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from zoneinfo import ZoneInfo
+ModuleNotFoundError: No module named 'zoneinfo'
+WARNING:  StatReload detected file change in 'lib/python3.9/site-packages/sqlalchemy/processors.py'. Reloading...
+Process SpawnProcess-9:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from zoneinfo import ZoneInfo
+ModuleNotFoundError: No module named 'zoneinfo'
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-10:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-11:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-12:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-13:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-14:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+Process SpawnProcess-15:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 60, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/server.py", line 67, in serve
+    config.load()
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/config.py", line 458, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 24, in import_from_string
+    raise exc from None
+  File "/home/serkan/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/serkan/fastingapi/./main.py", line 17, in <module>
+    from fastingapi.modules import users, fasts, weights
+  File "/home/serkan/fastingapi/modules/users.py", line 9, in <module>
+    from ..modules import fasts, weights
+  File "/home/serkan/fastingapi/modules/fasts.py", line 4, in <module>
+    from pytz import ZoneInfo
+ImportError: cannot import name 'ZoneInfo' from 'pytz' (/usr/lib/python3/dist-packages/pytz/__init__.py)
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Started server process [2336054]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336054]
+INFO:     Started server process [2336091]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336091]
+INFO:     Started server process [2336342]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336342]
+INFO:     Started server process [2336349]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336349]
+INFO:     Started server process [2336385]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336385]
+INFO:     Started server process [2336425]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected file change in 'modules/fasts.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2336425]
+INFO:     Started server process [2336531]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:36572 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36572 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36574 - "POST /fast/1/fasts/ HTTP/1.1" 400 Bad Request

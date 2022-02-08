@@ -11,4 +11,4 @@ else
 echo "No such process. Starting new FastAPI server"
 echo "You can hit ctrl + c now."
 fi
-nohup uvicorn main:app --host '0.0.0.0' --port 9800 &
+nohup uvicorn main:app --host '0.0.0.0' --port 9800 --reload &
