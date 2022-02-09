@@ -19,7 +19,7 @@ class FastCreate(FastBase):
     Create fast by sending start time and one of the planned duration (in hours) or planned end date
     information in the message body. 
     '''
-    start_time: datetime = datetime.now()
+    start_time: datetime
     planned_duration: Optional[float] = 23
     planned_end_time: Optional[datetime] = start_time + timedelta(hours=23)
 
@@ -45,7 +45,7 @@ class Fast(FastBase):
         orm_mode = True
 
 class FastEnd(FastBase):
-    end_time: Optional[datetime] = datetime.now()
+    end_time: Optional[datetime]
 
     @validator('end_time')
     def future_date(cls, dt):
@@ -79,7 +79,10 @@ def create_user_fast(db: Session, fast: FastCreate, user_id: int):
 
 
 def end_user_fast(db: Session, fast: FastEnd, active_fast):
-    active_fast.end_time = fast.end_time
+    if fast.end_time:
+        active_fast.end_time = fast.end_time
+    else:
+        active_fast.end_time = datetime.now()
     active_fast.completed = True
     active_fast.duration = active_fast.end_time - active_fast.start_time
     db.commit()

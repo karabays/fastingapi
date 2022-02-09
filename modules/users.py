@@ -52,9 +52,8 @@ def get_user(db: Session, user_id: int):
     user.active_fast = fasts.get_active_fast(db, user_id)
     # calculate the duration but don't write it to database until fast is completed.
     if user.active_fast:
-        user.active_fast.duration = datetime.datetime.utcnow() - user.active_fast.start_time
+        user.active_fast.duration = datetime.datetime.now() - user.active_fast.start_time
     return user
-
 
 
 def get_user_by_email(db: Session, email: str):
@@ -79,6 +78,8 @@ def create_user_db(db: Session, user: UserCreate):
 
 @router.post("/", response_model=UserBase)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    """Create a new user.
+    """
     db_user = get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -87,12 +88,16 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=List[User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    """Get list of all users.
+    """
     all_users = get_users(db, skip=skip, limit=limit)
     return all_users
 
 
 @router.get("/{user_id}", response_model=User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
+    """Get details of a specific user.
+    """
     db_user = get_user(db, user_id=user_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
