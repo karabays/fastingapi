@@ -46,3 +46,4 @@ INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     127.0.0.1:59166 - "GET /fast/1/delete_fast/7 HTTP/1.1" 200 OK
 INFO:     192.168.178.88:39258 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     192.168.178.88:39358 - "GET /users/1 HTTP/1.1" 200 OK
