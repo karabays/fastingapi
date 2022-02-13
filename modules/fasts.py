@@ -1,3 +1,4 @@
+import re
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, timedelta, timezone
@@ -86,6 +87,13 @@ def end_user_fast(db: Session, fast: FastEnd, active_fast):
     db.refresh(active_fast)
     return active_fast
 
+def delete_user_fast(db: Session, user_id:int, fast_id: int):
+    fast = db.query(DBFast).filter(DBFast.user_id == user_id, 
+        DBFast.id == fast_id).first()
+    fast.deleted = True
+    fast.completed = True
+    db.commit()
+    return fast
 
 @router.post("/{user_id}/fasts/", response_model=Fast)
 def create_fast_for_user(
@@ -121,3 +129,8 @@ def end_fast_for_user(
 def read_fasts(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     all_fasts = get_fasts(db, user_id=user_id, skip=skip, limit=limit)
     return all_fasts
+
+@router.get("/{user_id}/delete_fast/{fast_id}", response_model=Fast)
+def delete_fast(user_id:int,fast_id:int,db:Session=Depends(get_db)):
+    deleted_fast = delete_user_fast(db,user_id=user_id,fast_id=fast_id)
+    return deleted_fast
