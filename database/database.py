@@ -50,3 +50,7 @@ class DBWeight(Base):
     bmi = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("DBUser", back_populates="weights")
+
+if __name__ == '__main__':
+   user = session.query(DBUser).filter(DBUser.id == 1).first()
+   print(user.fasts)
